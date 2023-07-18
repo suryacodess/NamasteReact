@@ -22,6 +22,35 @@
 
     <script>
 
+
+        // notes
+        // What is ReactJS?
+        // React is a frontend Javascript library which is used to develop frontend applications
+        // React is developed by engineers of facebook
+        // With react we can easily create Single Page Applications (SPA)
+        // ReactJS is used by some big companies like AirBnb, Facebook, Netflix, Instagram, youtube etc.
+
+        // React Application can be created without the react application!
+        // with the help of react cdn we can initialise the react app in html
+        // - React cdn is core library
+        // - ReactDOM cdn is used to manipulate the DOM
+
+        // React is like a global object
+
+        // to create an html element in react we use React.createElement() api
+        // by passing element name, and its content
+        // eg - const h1 = React.createElement("h1", "heading tag") 
+
+        // to append this element in html we use ReactDOM object
+        // eg -
+        // const root = ReactDOM.createRoot(document.getElementById("root"))
+        // root.render(h1)
+
+
+        console.log(React.version) // 18.2.0
+
+
+
         const h1 = React.createElement("h1", {}, "hello surya"); // creating an h1 element in react
         const h2 = React.createElement("h1", {}, "hello surya"); // creating an h1 element in react
         const h3 = React.createElement("h1", {}, "hello surya"); // creating an h1 element in react
