@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inception | Namaste React</title>
+
+</head>
+
+<body>
+
+    <main id="root">
+
+    </main>
+
+
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+
+
+    <script>
+
+        const h1 = React.createElement("h1", {}, "hello surya"); // creating an h1 element in react
+        const h2 = React.createElement("h1", {}, "hello surya"); // creating an h1 element in react
+        const h3 = React.createElement("h1", {}, "hello surya"); // creating an h1 element in react
+        const h4 = React.createElement("h1", {}, "hello surya"); // creating an h1 element in react
+
+        const container = React.createElement("div",
+            { id: "container", style: { color: "Red", backgroundColor: "#000", padding: "20px" } },
+            [h1, h2, h3, h4])
+
+        const root = ReactDOM.createRoot(document.getElementById("root")); // setting up root element in html
+
+        root.render(container); // rendering h1 element in root
+
+        console.log(h1); // react.element >> object
+
+    </script>
+
+
+
+</body>
+
+</html>
