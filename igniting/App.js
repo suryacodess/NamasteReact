@@ -35,3 +35,7 @@ root.render(container);
 // 5. npx parcel index.html
 
 // PARCEL IS BEAST
+
+// package.json tracks all the dependency which are downloaded
+// package.lock.json holds the exact version of the dependency
+// node_modules acts like a database here which stores all dependencies
