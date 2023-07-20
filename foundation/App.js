@@ -1,19 +1,15 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 
 const h1 = <h1>JSX</h1>;
 
-const container = (
+const Container = () => (
   <div id="container">
     {h1}
     <h1>BABEL</h1>
     <h1>PARCEL</h1>
   </div>
 );
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(container);
 
 // JSX
 // JSX is developed by facebook engineers, jSX is known as Javascript XML
@@ -31,3 +27,30 @@ root.render(container);
 // BABEL
 // Babel is a javascript library which is used to convert higher version code into low version code
 // for browser compatibilty, babel uses BrowserList library
+
+// Everything in react is a component
+// component are two types -
+// - Functional Component
+// - Class based Component
+
+// Functional Component is nothing but a function which returns react.element or a JSX
+
+const Heading = () => {
+  return (
+    <>
+      <Container />
+      {Container()}
+      <header>
+        <h1>Heading</h1>
+      </header>
+      <section className="hero">
+        <h1>Hero</h1>
+      </section>
+    </>
+  );
+};
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
+
+// root.render(Heading());
+root.render(<Heading />);
