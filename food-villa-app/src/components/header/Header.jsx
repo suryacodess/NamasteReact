@@ -10,10 +10,11 @@ export default function Header() {
 
       <nav>
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Contact</li>
-          <li>Shop</li>
+          <li>Search</li>
+          <li>Offers</li>
+          <li>Help</li>
+          <li>Sign in</li>
+          <li>Cart</li>
         </ul>
       </nav>
     </header>
