@@ -5,7 +5,9 @@ import { IMG_URL } from "../../utils/Constants";
 
 export default function Body() {
   const [restaurants, setRestaurants] = useState([]);
+//   const [filterRestaurants, setFilterRestaurants] = useState([]);
   const [isLoader, setIsLoader] = useState(false);
+  const [searchInput, setSearchInput] = useState(" ");
 
   useEffect(() => {
     setIsLoader(true);
@@ -18,47 +20,77 @@ export default function Body() {
     );
     setIsLoader(false);
     const json = await data.json();
-    // console.log(json?.data?.cards[2]?.data?.data?.cards);
     setRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    // setFilterRestaurants(json?.data?.cards[2]?.data?.data?.cards);
   };
 
-  const LoadingC = () => {
-    return <h1>Loading...</h1>;
-  };
+  //   console.log(searchInput);
+  //   console.log(filterRestaurants);
+  //   console.log(restaurants);
+  //   const handleSearch = () => {
+  //     const filter = restaurants.filter((restaurant) => {
+  //       if (searchInput.length === 0) {
+  //         return restaurant;
+  //       } else {
+  //         return restaurant.data.name.includes(searchInput);
+  //       }
+  //     });
+  //     setRestaurants(filter);
+  //   };
 
   return (
     <main className="main">
       <section className="search">
-        <input type="text" placeholder="search" id="search" />
-        <button>search</button>
+        <input
+          type="text"
+          placeholder="search"
+          id="search"
+          onChange={(e) => setSearchInput(e.target.value)}
+          value={searchInput}
+        />
+        {/* <button onClick={handleSearch}>search</button> */}
       </section>
       <section className="cards">
         <div className="cards-inner">
+          {/* {restaurants?.length === 0 ? "no match found" : ""} */}
           {isLoader === true
             ? "loading...."
-            : restaurants?.map((restaurant) => {
-                return (
-                  <>
-                    <div className="card" key={restaurant.data.id}>
-                      <div className="img">
-                        <img
-                          className="res-logo"
-                          src={IMG_URL + restaurant.data.cloudinaryImageId}
-                          alt="Not rendered"
-                        />
+            : restaurants
+                ?.filter((restaurant) => {
+                  if (searchInput === " ") {
+                    return restaurant?.data;
+                  }
+                  if (
+                    restaurant?.data?.name
+                      ?.toLowerCase()
+                      ?.includes(searchInput.toLowerCase().trim())
+                  ) {
+                    return restaurant.data;
+                  }
+                  return null;
+                })
+                .map((restaurant, i) => {
+                  return (
+                    <>
+                      <div className="card" key={i}>
+                        <div className="img">
+                          <img
+                            src={IMG_URL + restaurant.data.cloudinaryImageId}
+                            alt="img"
+                          />
+                        </div>
+                        <div className="description">
+                          <h4>{restaurant.data.name}</h4>
+                          <p>{restaurant.data.locality}</p>
+                          <p>{restaurant.data.avgRatingString}</p>
+                          <p>{restaurant.data.costForTwo}</p>
+                          <small>{restaurant.data.cuisines.join("-")}</small>
+                          <p>{restaurant.data.costForTwoString}</p>
+                        </div>
                       </div>
-                      <div className="description">
-                        <h4>{restaurant.data.name}</h4>
-                        <p>{restaurant.data.locality}</p>
-                        <p>{restaurant.data.avgRatingString}</p>
-                        <p>{restaurant.data.costForTwo}</p>
-                        <small>{restaurant.data.cuisines.join("-")}</small>
-                        <p>{restaurant.data.costForTwoString}</p>
-                      </div>
-                    </div>
-                  </>
-                );
-              })}
+                    </>
+                  );
+                })}
         </div>
       </section>
     </main>
