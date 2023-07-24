@@ -1,0 +1,14 @@
+.schimmer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.schimmer .schimmer-card {
+  max-width: 320px;
+  width: 100%;
+  height: 350px;
+  margin: 20px;
+  background: #eee;
+}/*# sourceMappingURL=style.css.map */
