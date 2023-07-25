@@ -10,6 +10,7 @@ import Offers from "./pages/offers/Offers";
 import Help from "./pages/help/Help";
 import Error from "./pages/error/Error";
 import Search from "./pages/search/Search";
+import RestroDetails from "./pages/restroDetails/RestroDetails";
 
 const routerApp = createBrowserRouter([
   {
@@ -36,6 +37,10 @@ const routerApp = createBrowserRouter([
   {
     path: "/help",
     element: <Help />,
+  },
+  {
+    path: "/restraunt/:id",
+    element: <RestroDetails />,
   },
 ]);
 

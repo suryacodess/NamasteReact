@@ -1,0 +1,45 @@
+.restroDetails {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .restroDetails-inner {
+    padding: 0 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    .card {
+      width: 300px;
+      min-height: 300px;
+      border: 2px solid #eee;
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+
+      .img {
+        width: 100%;
+        height: 200px;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .description {
+        padding: 10px;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  }
+}

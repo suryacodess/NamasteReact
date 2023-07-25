@@ -1,0 +1,42 @@
+.restroDetails {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.restroDetails .restroDetails-inner {
+  padding: 0 30px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.restroDetails .restroDetails-inner .card {
+  width: 300px;
+  min-height: 300px;
+  border: 2px solid #eee;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.restroDetails .restroDetails-inner .card .img {
+  width: 100%;
+  height: 200px;
+}
+.restroDetails .restroDetails-inner .card .img img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.restroDetails .restroDetails-inner .card .description {
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+}/*# sourceMappingURL=style.css.map */

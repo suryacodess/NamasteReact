@@ -3,6 +3,7 @@ import "./sass/style.css";
 
 import { IMG_URL } from "../../utils/Constants";
 import Schimmer from "../schimmer/Schimmer";
+import { Link } from "react-router-dom";
 
 export default function Body() {
   const [restaurants, setRestaurants] = useState([]);
@@ -22,25 +23,7 @@ export default function Body() {
     setFilterRestaurants(json?.data?.cards[2]?.data?.data?.cards);
   };
 
-  //   console.log(searchInput);
-  //   console.log(filterRestaurants);
-  //   console.log(restaurants);
-  //   const handleSearch = () => {
-  //     const filter = restaurants.filter((restaurant) => {
-  //       if (searchInput.length === 0) {
-  //         return restaurant;
-  //       } else {
-  //         return restaurant.data.name.includes(searchInput);
-  //       }
-  //     });
-  //     setRestaurants(filter);
-  //   };
-
   if (!restaurants) return null;
-
-  //   if(filterRestaurants?.length === 0){
-  //     return <h1>Not Found!</h1>
-  //   }
 
   return (
     <main className="main">
@@ -73,10 +56,18 @@ export default function Body() {
                 }
                 return null;
               })
-              .map((restaurant, i) => {
+              .map((restaurant) => {
                 return (
-                  <>
-                    <div className="card" key={Math.random()}>
+                  <Link
+                    to={"/restraunt/" + restaurant.data.id}
+                    style={{
+                      textDecoration: "none",
+                      color: "#000",
+                      cursor: "pointer",
+                    }}
+                    key={Math.random()}
+                  >
+                    <div className="card">
                       <div className="img">
                         <img
                           src={IMG_URL + restaurant.data.cloudinaryImageId}
@@ -84,15 +75,17 @@ export default function Body() {
                         />
                       </div>
                       <div className="description">
-                        <h4>{restaurant.data.name}</h4>
-                        <p>{restaurant.data.locality}</p>
-                        <p>{restaurant.data.avgRatingString}</p>
-                        <p>{restaurant.data.costForTwo}</p>
-                        <small>{restaurant.data.cuisines.join("-")}</small>
-                        <p>{restaurant.data.costForTwoString}</p>
+                        <h5>{restaurant.data.name}</h5>
+                        <small>{restaurant.data.locality}</small>
+                        <small>{restaurant.data.avgRatingString}</small>
+                        <small>{restaurant.data.costForTwo}</small>
+                        <small>
+                          {restaurant.data.cuisines.join("-").slice(0, 25)}
+                        </small>
+                        <h6>{restaurant.data.costForTwoString}</h6>
                       </div>
                     </div>
-                  </>
+                  </Link>
                 );
               })
           )}
