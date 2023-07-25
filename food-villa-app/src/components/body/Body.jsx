@@ -5,10 +5,14 @@ import { IMG_URL } from "../../utils/Constants";
 import Schimmer from "../schimmer/Schimmer";
 import { Link } from "react-router-dom";
 
+import AppStatus from "../AppStatus/useAppStatus";
+
 export default function Body() {
   const [restaurants, setRestaurants] = useState([]);
   const [filterRestaurants, setFilterRestaurants] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+
+  const status = AppStatus();
 
   useEffect(() => {
     getData();
@@ -26,71 +30,77 @@ export default function Body() {
   if (!restaurants) return null;
 
   return (
-    <main className="main">
-      <section className="search">
-        <input
-          type="text"
-          placeholder="search"
-          id="search"
-          onChange={(e) => setSearchInput(e.target.value)}
-          value={searchInput}
-        />
-        {/* <button onClick={handleSearch}>search</button> */}
-      </section>
-      <section className="cards">
-        <div className="cards-inner">
-          {restaurants.length === 0 ? (
-            <Schimmer />
-          ) : (
-            filterRestaurants
-              ?.filter((restaurant) => {
-                if (searchInput === " ") {
-                  return restaurant?.data;
-                }
-                if (
-                  restaurant?.data?.name
-                    ?.toLowerCase()
-                    ?.includes(searchInput.toLowerCase().trim())
-                ) {
-                  return restaurant.data;
-                }
-                return null;
-              })
-              .map((restaurant) => {
-                return (
-                  <Link
-                    to={"/restraunt/" + restaurant.data.id}
-                    style={{
-                      textDecoration: "none",
-                      color: "#000",
-                      cursor: "pointer",
-                    }}
-                    key={Math.random()}
-                  >
-                    <div className="card">
-                      <div className="img">
-                        <img
-                          src={IMG_URL + restaurant.data.cloudinaryImageId}
-                          alt="img"
-                        />
-                      </div>
-                      <div className="description">
-                        <h5>{restaurant.data.name}</h5>
-                        <small>{restaurant.data.locality}</small>
-                        <small>{restaurant.data.avgRatingString}</small>
-                        <small>{restaurant.data.costForTwo}</small>
-                        <small>
-                          {restaurant.data.cuisines.join("-").slice(0, 25)}
-                        </small>
-                        <h6>{restaurant.data.costForTwoString}</h6>
-                      </div>
-                    </div>
-                  </Link>
-                );
-              })
-          )}
-        </div>
-      </section>
-    </main>
+    <>
+      {status === true ? (
+        <main className="main">
+          <section className="search">
+            <input
+              type="text"
+              placeholder="search"
+              id="search"
+              onChange={(e) => setSearchInput(e.target.value)}
+              value={searchInput}
+            />
+            {/* <button onClick={handleSearch}>search</button> */}
+          </section>
+          <section className="cards">
+            <div className="cards-inner">
+              {restaurants.length === 0 ? (
+                <Schimmer />
+              ) : (
+                filterRestaurants
+                  ?.filter((restaurant) => {
+                    if (searchInput === " ") {
+                      return restaurant?.data;
+                    }
+                    if (
+                      restaurant?.data?.name
+                        ?.toLowerCase()
+                        ?.includes(searchInput.toLowerCase().trim())
+                    ) {
+                      return restaurant.data;
+                    }
+                    return null;
+                  })
+                  .map((restaurant) => {
+                    return (
+                      <Link
+                        to={"/restraunt/" + restaurant.data.id}
+                        style={{
+                          textDecoration: "none",
+                          color: "#000",
+                          cursor: "pointer",
+                        }}
+                        key={Math.random()}
+                      >
+                        <div className="card">
+                          <div className="img">
+                            <img
+                              src={IMG_URL + restaurant.data.cloudinaryImageId}
+                              alt="img"
+                            />
+                          </div>
+                          <div className="description">
+                            <h5>{restaurant.data.name}</h5>
+                            <small>{restaurant.data.locality}</small>
+                            <small>{restaurant.data.avgRatingString}</small>
+                            <small>{restaurant.data.costForTwo}</small>
+                            <small>
+                              {restaurant.data.cuisines.join("-").slice(0, 25)}
+                            </small>
+                            <h6>{restaurant.data.costForTwoString}</h6>
+                          </div>
+                        </div>
+                      </Link>
+                    );
+                  })
+              )}
+            </div>
+          </section>
+        </main>
+      ) : (
+        <h5 style={{width:"100%", textAlign:"center", padding:"20px"}}>Oops, You're Offline, Please check you're internet connectivity!</h5>
+      )}
+    </>
   );
 }
