@@ -12,7 +12,7 @@ export default function RestroDetails() {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  });
 
   const fetchData = async () => {
     const data = await fetch(

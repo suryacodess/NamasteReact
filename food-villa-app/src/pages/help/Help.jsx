@@ -3,10 +3,10 @@ import Header from "../../components/header/Header";
 import UserClass from "../../components/user/UserClass";
 
 class Help extends React.Component {
-  constructor(props) {
-    super(props);
-    // console.log("parent constructor");
-  }
+  // constructor(props) {
+  //   super(props);
+  //   // console.log("parent constructor");
+  // }
 
   componentDidMount() {
     // console.log("parent component did mount");

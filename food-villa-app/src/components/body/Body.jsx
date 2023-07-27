@@ -23,11 +23,27 @@ export default function Body() {
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&page_type=DESKTOP_WEB_LISTING"
     );
     const json = await data.json();
-    setRestaurants(json?.data?.cards[2]?.data?.data?.cards);
-    setFilterRestaurants(json?.data?.cards[2]?.data?.data?.cards);
+    // console.log(
+    //   json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    // );
+    setRestaurants(
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
+    setFilterRestaurants(
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    );
   };
 
-  if (!restaurants) return null;
+  // console.log(restaurants[0].info.id)
+
+  let obj = Object.values(restaurants);
+  // console.log(obj);
+
+  // obj.map((obj) => {
+  //   console.log(obj.info.id);
+  // });
+
+  if (!restaurants) return "try again later";
 
   return (
     <>
@@ -45,27 +61,27 @@ export default function Body() {
           </section>
           <section className="cards">
             <div className="cards-inner">
-              {restaurants.length === 0 ? (
+              {restaurants?.length === 0 ? (
                 <Schimmer />
               ) : (
-                filterRestaurants
-                  ?.filter((restaurant) => {
+                obj
+                  ?.filter((obj) => {
                     if (searchInput === " ") {
-                      return restaurant?.data;
+                      return obj?.info;
                     }
                     if (
-                      restaurant?.data?.name
+                      obj?.info?.name
                         ?.toLowerCase()
                         ?.includes(searchInput.toLowerCase().trim())
                     ) {
-                      return restaurant.data;
+                      return obj.info;
                     }
                     return null;
                   })
                   .map((restaurant) => {
                     return (
                       <Link
-                        to={"/restraunt/" + restaurant.data.id}
+                        to={"/restraunt/" + restaurant?.info?.id}
                         style={{
                           textDecoration: "none",
                           color: "#000",
@@ -76,19 +92,23 @@ export default function Body() {
                         <div className="card">
                           <div className="img">
                             <img
-                              src={IMG_URL + restaurant.data.cloudinaryImageId}
+                              src={
+                                IMG_URL + restaurant?.info?.cloudinaryImageId
+                              }
                               alt="img"
                             />
                           </div>
                           <div className="description">
-                            <h5>{restaurant.data.name}</h5>
-                            <small>{restaurant.data.locality}</small>
-                            <small>{restaurant.data.avgRatingString}</small>
-                            <small>{restaurant.data.costForTwo}</small>
+                            <h5>{restaurant.info.name}</h5>
+                            <small>{restaurant?.info?.locality}</small>
+                            <small>{restaurant?.info?.avgRatingString}</small>
+                            <small>{restaurant?.info?.costForTwo}</small>
                             <small>
-                              {restaurant.data.cuisines.join("-").slice(0, 25)}
+                              {restaurant?.info?.cuisines
+                                ?.join("-")
+                                ?.slice(0, 25)}
                             </small>
-                            <h6>{restaurant.data.costForTwoString}</h6>
+                            <h6>{restaurant?.info?.costForTwoString}</h6>
                           </div>
                         </div>
                       </Link>
@@ -99,7 +119,9 @@ export default function Body() {
           </section>
         </main>
       ) : (
-        <h5 style={{width:"100%", textAlign:"center", padding:"20px"}}>Oops, You're Offline, Please check you're internet connectivity!</h5>
+        <h5 style={{ width: "100%", textAlign: "center", padding: "20px" }}>
+          Oops, You're Offline, Please check you're internet connectivity!
+        </h5>
       )}
     </>
   );
