@@ -34,14 +34,7 @@ export default function Body() {
     );
   };
 
-  // console.log(restaurants[0].info.id)
-
-  let obj = Object.values(restaurants);
-  // console.log(obj);
-
-  // obj.map((obj) => {
-  //   console.log(obj.info.id);
-  // });
+  let obj = Object.values(filterRestaurants);
 
   if (!restaurants) return "try again later";
 
