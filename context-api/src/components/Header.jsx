@@ -5,7 +5,7 @@ export default function Header() {
   const user = useContext(UserContext);
 
   return (
-    <header className="flex justify-between items-center p-5">
+    <header className="flex justify-between items-center p-5 w-full fixed">
       <div className="logo">
         <h1 className="text-2xl font-bold">Context api</h1>
       </div>
@@ -16,7 +16,12 @@ export default function Header() {
           <li className="list-none ml-4">Shop</li>
           <li className="list-none ml-4">Careers</li>
           <li className="list-none ml-4">Contact</li>
-          {user && <li className="list-none ml-4">hey, {user}</li>}
+          {user && (
+            <li className="list-none ml-4">
+              hey, 
+              <span className="font-bold"> {user}</span>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
